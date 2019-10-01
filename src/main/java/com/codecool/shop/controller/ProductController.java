@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
@@ -28,9 +29,15 @@ public class ProductController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        ProductCategory defaultProductCategory = productCategoryDataStore.find(1);
-        context.setVariable("category", defaultProductCategory);
-        context.setVariable("products", productDataStore.getBy(defaultProductCategory));
+        List<ProductCategory> categories = productCategoryDataStore.getAll();
+        String categoryParam = req.getParameter("category");
+        int chosenId = (categoryParam == null) ? 1 : Integer.parseInt(req.getParameter("category"));
+
+        ProductCategory chosenProductCategory = productCategoryDataStore.find(chosenId);
+        context.setVariable("categories", categories);
+        context.setVariable("products", productDataStore.getBy(chosenProductCategory));
+        context.setVariable("chosencategory", chosenProductCategory);
+
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));
@@ -40,3 +47,4 @@ public class ProductController extends HttpServlet {
     }
 
 }
+

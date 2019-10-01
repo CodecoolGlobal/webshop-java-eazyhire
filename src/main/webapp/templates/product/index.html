@@ -35,10 +35,16 @@
 </div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+    <div id="categories" class="row">
+        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="category,iterStat : ${categories}">
+            <a th:attr="href='/?category=' + ${category.id}">
+                <div class="card" >
+                    <strong th:text="${category.name}">Category Title</strong>
+                </div>
+            </a>
+        </div>
+        </div>
     </div>
-
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
