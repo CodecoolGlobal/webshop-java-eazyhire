@@ -39,6 +39,10 @@ public class Order {
         return sum;
     }
 
+    public List<LineItem> getItems() {
+        return new ArrayList<>(items);
+    }
+
     @Override
     public String toString() {
         return "Order{" +
