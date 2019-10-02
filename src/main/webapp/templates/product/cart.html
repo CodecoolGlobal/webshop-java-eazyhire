@@ -54,7 +54,13 @@
         <tr>
             <td th:text="${item.getProduct().getName()}"></td>
             <td th:text="${item.getProduct().getPrice()}"></td>
-            <td th:text="${item.getQuantity()}"></td>
+            <td>
+                <form action="/cart" method="post">
+                    <input type="number" name="quantity" th:value="${item.getQuantity()}" min="0">
+                    <input type="hidden" name="productId" th:value="${item.getProduct().getId()}">
+                    <button type="submit">Modify</button>
+                </form>
+            </td>
             <td th:text="${item.getTotalPriceString()}"></td>
         </tr>
         </tbody>
