@@ -57,8 +57,9 @@ public class ProductController extends HttpServlet {
         Product product = productDao.find(productId);
         OrderDao orderDao = OrderDaoMem.getInstance();
         Order currentOrder = orderDao.find(1);
-        Order order = (currentOrder == null) ? new Order(product) : currentOrder.addProduct(product);
-
+        if (currentOrder == null) currentOrder = new Order(product);
+        else currentOrder.addProduct(product);
+        System.out.println(currentOrder);
     }
 }
 
