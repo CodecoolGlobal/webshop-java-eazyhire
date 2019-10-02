@@ -30,6 +30,7 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        OrderDao orderDataStore = OrderDaoMem.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -41,6 +42,10 @@ public class ProductController extends HttpServlet {
         context.setVariable("categories", categories);
         context.setVariable("products", productDataStore.getBy(chosenProductCategory));
         context.setVariable("chosencategory", chosenProductCategory);
+
+        final Order order = orderDataStore.find(1);
+        int sumQuantity = order == null ? 0 : order.getSumQuantity();
+        context.setVariable("sumquantitiy", sumQuantity);
 
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
@@ -69,6 +74,8 @@ public class ProductController extends HttpServlet {
         }
 
         System.out.println(orderDao.find(1));
+
+        doGet(req, resp);
     }
 }
 

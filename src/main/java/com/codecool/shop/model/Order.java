@@ -31,6 +31,14 @@ public class Order {
         this.id = id;
     }
 
+    public int getSumQuantity() {
+        int sum = 0;
+        for (LineItem item : items) {
+            sum += item.getQuantity();
+        }
+        return sum;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
