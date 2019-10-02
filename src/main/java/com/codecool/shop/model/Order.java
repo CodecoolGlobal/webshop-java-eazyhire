@@ -35,10 +35,18 @@ public class Order {
     public void setQuantityForProduct(int productId, int quantity) {
         for (LineItem item : items) {
             if (item.getProduct().getId() == productId) {
-                item.setQuantity(quantity);
+                if (quantity == 0) {
+                    removeItem(item);
+                } else {
+                    item.setQuantity(quantity);
+                }
                 return;
             }
         }
+    }
+
+    private void removeItem(LineItem item) {
+        items.remove(item);
     }
 
     public int getId() {
