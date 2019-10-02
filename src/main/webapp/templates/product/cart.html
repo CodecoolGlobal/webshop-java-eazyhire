@@ -36,7 +36,7 @@
 <body>
 <div th:replace="header.html :: copy"></div>
 
-<div class="container" id="cart">
+<div class="container" id="cart" th:if="${order != null}" >
 
     <div class="col col-sm-12 col-md-6 col-lg-4" th:each="item,iterStat : ${order.getItems()}">
         <div class="row">
@@ -58,6 +58,8 @@
     <h2 class="card-text" th:text="${'Sum price: ' + order.getTotalPriceString()}">Sum price</h2>
 
 </div>
+<h2 class="container" th:if="${order == null}" >No items yet in the cart.</h2>
+
 
 
 
