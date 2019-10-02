@@ -1,4 +1,4 @@
-import {dataHandler} from "dataHandler.js";
+import {dataHandler} from "./dataHandler.js";
 
 function init(){
     let buttons = document.querySelectorAll(".add-to-cart");
@@ -11,9 +11,8 @@ function addToCart (event) {
 
     let button = event.target;
     let productId = button.dataset["productid"];
-    let data = {
-        'productId': productId,
-    };
+    let data = "productId=" + productId;
+    console.log(data);
     dataHandler.sendData(data, '/');
 }
 

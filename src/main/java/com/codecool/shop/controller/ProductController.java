@@ -53,14 +53,22 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
-        int productId = Integer.parseInt(req.getParameter("productid"));
+
+        String productid = req.getParameter("productId");
+        int productId = Integer.parseInt(productid);
         ProductDao productDao = ProductDaoMem.getInstance();
         Product product = productDao.find(productId);
         OrderDao orderDao = OrderDaoMem.getInstance();
         Order currentOrder = orderDao.find(1);
-        if (currentOrder == null) currentOrder = new Order(product);
-        else currentOrder.addProduct(product);
-        System.out.println(currentOrder);
+        if (currentOrder == null) {
+            currentOrder = new Order(product);
+            orderDao.add(currentOrder);
+        }
+        else {
+            currentOrder.addProduct(product);
+        }
+
+        System.out.println(orderDao.find(1));
     }
 }
 

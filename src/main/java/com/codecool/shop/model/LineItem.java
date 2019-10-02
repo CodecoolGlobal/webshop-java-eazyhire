@@ -41,5 +41,13 @@ public class LineItem {
     public void decreaseQuantity() {
         this.quantity -= 1;
     }
+
+    @Override
+    public String toString() {
+        return "LineItem{" +
+                "quantity=" + quantity +
+                ", product=" + product +
+                '}';
+    }
 }
 

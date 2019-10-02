@@ -24,7 +24,8 @@ export let dataHandler = {
         // it is not called from outside
         // sends the data to the API, and calls callback function
         let XHR = new XMLHttpRequest();
-        let jsonData = JSON.stringify(data);
+        //let jsonData = JSON.stringify(data);
+
         if (callback != null) {
             XHR.addEventListener("load", function (event) {
                 callback();
@@ -34,8 +35,8 @@ export let dataHandler = {
             alert('Sorry, could not send this.');
         });
         XHR.open("POST", url);
-        XHR.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        XHR.send(jsonData);
+        XHR.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        XHR.send(data );
     },
     sendData: function (data, url) {
         dataHandler._api_post(url, data);
