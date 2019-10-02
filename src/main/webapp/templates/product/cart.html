@@ -44,6 +44,9 @@
                 <p class="card-text" th:text="${item.getProduct().getName()}">Product name</p>
             </div>
             <div class="card">
+                <p class="card-text" th:text="${item.getProduct().getPrice()}">Unit price</p>
+            </div>
+            <div class="card">
                 <p class="card-text" th:text="${item.getQuantity()}">Quantity</p>
             </div>
             <div class="card">
@@ -52,7 +55,11 @@
         </div>
     </div>
 
+    <h2 class="card-text" th:text="${'Sum price: ' + order.getTotalPriceString()}">Sum price</h2>
+
 </div>
+
+
 
 <div th:replace="footer.html :: copy"></div>
 
