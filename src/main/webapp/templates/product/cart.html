@@ -40,7 +40,7 @@
     <button>Back to Store</button>
 </a>
 
-<div class="container" id="cart" th:if="${order != null}">
+<div class="container" id="cart" th:if="${order != null && order.getSumQuantity() > 0}">
     <table class="table">
         <thead>
         <tr>
@@ -67,7 +67,7 @@
     </table>
     <h2 class="card-text" th:text="${'Sum price: ' + order.getTotalPriceString()}">Sum price</h2>
 </div>
-<h2 class="container" th:if="${order == null}">No items yet in the cart.</h2>
+<h2 class="container" th:if="${order == null || order.getSumQuantity() == 0}">No items yet in the cart.</h2>
 
 
 <div th:replace="footer.html :: copy"></div>
