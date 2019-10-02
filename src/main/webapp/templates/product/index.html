@@ -26,6 +26,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 </head>
 
 <body>
@@ -58,7 +59,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <button class="btn btn-success">Add to cart</button>
+                        <button class="btn btn-success add-to-cart" th:attr="data-productid=${prod.id}">Add to cart</button>
                     </div>
                 </div>
             </div>
