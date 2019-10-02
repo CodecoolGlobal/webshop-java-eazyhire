@@ -30,7 +30,9 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        System.out.println("yaaay POST");
+        int productId = Integer.parseInt(req.getParameter("productId"));
+        int newQuantity = Integer.parseInt(req.getParameter("quantity"));
+        System.out.println("Modify quantity, productId: " + productId + ", quantity: " + newQuantity);
         doGet(req, resp);
     }
 }
