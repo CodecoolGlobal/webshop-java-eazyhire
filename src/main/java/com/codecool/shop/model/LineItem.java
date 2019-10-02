@@ -37,6 +37,10 @@ public class LineItem {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public void increaseQuantity() {
         this.quantity += 1;
     }

@@ -33,6 +33,10 @@ public class CartController extends HttpServlet {
         int productId = Integer.parseInt(req.getParameter("productId"));
         int newQuantity = Integer.parseInt(req.getParameter("quantity"));
         System.out.println("Modify quantity, productId: " + productId + ", quantity: " + newQuantity);
+        OrderDao orderDao = OrderDaoMem.getInstance();
+        Order currentOrder = orderDao.find(1);
+        currentOrder.setQuantityForProduct(productId, newQuantity);
+
         doGet(req, resp);
     }
 }
