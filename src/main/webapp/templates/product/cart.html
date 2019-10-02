@@ -36,31 +36,28 @@
 <body>
 <div th:replace="header.html :: copy"></div>
 
-<div class="container" id="cart" th:if="${order != null}" >
-
-    <div class="col col-sm-12 col-md-6 col-lg-4" th:each="item,iterStat : ${order.getItems()}">
-        <div class="row">
-            <div class="card">
-                <p class="card-text" th:text="${item.getProduct().getName()}">Product name</p>
-            </div>
-            <div class="card">
-                <p class="card-text" th:text="${item.getProduct().getPrice()}">Unit price</p>
-            </div>
-            <div class="card">
-                <p class="card-text" th:text="${item.getQuantity()}">Quantity</p>
-            </div>
-            <div class="card">
-                <p class="card-text" th:text="${item.getTotalPriceString()}">Sum price</p>
-            </div>
-        </div>
-    </div>
-
+<div class="container" id="cart" th:if="${order != null}">
+    <table class="table">
+        <thead>
+        </tr>
+            <th scope="col">Product name</th>
+            <th scope="col">Unit price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Subtotal price</th>
+        <tr>
+        </thead>
+        <tbody th:each="item,iterStat : ${order.getItems()}">
+        <tr>
+            <td th:text="${item.getProduct().getName()}"></td>
+            <td th:text="${item.getProduct().getPrice()}"></td>
+            <td th:text="${item.getQuantity()}"></td>
+            <td th:text="${item.getTotalPriceString()}"></td>
+        </tr>
+        </tbody>
+    </table>
     <h2 class="card-text" th:text="${'Sum price: ' + order.getTotalPriceString()}">Sum price</h2>
-
 </div>
-<h2 class="container" th:if="${order == null}" >No items yet in the cart.</h2>
-
-
+<h2 class="container" th:if="${order == null}">No items yet in the cart.</h2>
 
 
 <div th:replace="footer.html :: copy"></div>
