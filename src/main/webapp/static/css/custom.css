@@ -63,7 +63,7 @@
 .header
 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url("/static/img/city.jpg");
-    height: 50%;
+    height: 300px;
 
     /* Position and center the image to scale nicely on all screens */
     background-position: center;
@@ -71,13 +71,15 @@
     background-size: cover;
 
     color: white;
+
+
+}
+
+.hero-text {
+    padding: 100px;
 }
 
 
 
 
-.title
-{
-    background-color: darkcyan;
-    background-blend-mode: overlay;
-}
+

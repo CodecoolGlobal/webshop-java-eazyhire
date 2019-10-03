@@ -3,28 +3,24 @@
 <body>
 
 <div th:fragment="copy">
-    <div class="jumbotron text-center header">
-        <h1>Codecool Shop</h1>
-        <p class="cart-sumquantity" th:attr="data-sumquantity=${sumquantitiy}" th:if="${sumquantitiy != null}" th:text="${'Cart: ' + sumquantitiy}"></p>
+    <div class="text-center header">
+        <div class="hero-text">
+            <h1>Easy Hire</h1>
+        </div>
     </div>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" th:each=" category,iterStat : ${categories}">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" th:attr="href='/?category=' + ${category.id}" th:text="${category.name}">Category Title</a>
                 </li>
             </ul>
+            <a class="nav-link cart-sumquantity" href="/cart" th:attr="data-sumquantity=${sumquantitiy}" th:if="${sumquantitiy != null}" th:text="${'Cart: ' + sumquantitiy}">Cart</a>
         </div>
     </nav>
 
