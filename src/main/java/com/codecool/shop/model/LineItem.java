@@ -26,7 +26,7 @@ public class LineItem {
     }
 
     public String getTotalPriceString() {
-        return getTotalPrice() + " " + product.getDefaultCurrency().toString();
+        return (int) getTotalPrice() + " " + product.getDefaultCurrency().toString();
     }
 
     public Product getProduct() {

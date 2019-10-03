@@ -34,7 +34,7 @@ public class Product extends BaseModel {
     }
 
     public String getPrice() {
-        return this.defaultPrice + " " + this.defaultCurrency.toString() + "/month";
+        return (int) this.defaultPrice + " " + this.defaultCurrency.toString() + "/month";
     }
 
     public void setPrice(float price, String currency) {
