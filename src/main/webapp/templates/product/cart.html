@@ -36,10 +36,6 @@
 <body>
 <div th:replace="header.html :: copy"></div>
 
-<a href="/">
-    <button>Back to Store</button>
-</a>
-
 <div class="container" id="cart" th:if="${order != null && order.getSumQuantity() > 0}">
     <table class="table">
         <thead>
