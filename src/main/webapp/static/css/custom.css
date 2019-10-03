@@ -62,7 +62,7 @@
 }
 .header
 {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url("/static/img/city.jpg");
+    background-image: linear-gradient(rgba(23, 162, 184, 0.5), rgba(23, 162, 184, 0.5)),  url("/static/img/city.jpg");
     height: 300px;
 
     /* Position and center the image to scale nicely on all screens */
@@ -81,10 +81,11 @@
 
 .hero-text h1 {
     font-size: 100px;
+    font-family: "Snell Roundhand";
 }
 
 .cart-sumquantity {
-    color: red;
+    color: white;
     font-weight: bolder;
     font-size: large;
 }
@@ -107,6 +108,7 @@
 .title {
     margin-top: 50px;
     display: inline-block;
+    color: grey;
 }
  body {
      text-align: center
