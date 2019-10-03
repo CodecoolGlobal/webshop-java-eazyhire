@@ -96,11 +96,12 @@
 }
 
 .product-image {
-    height:250px
+    height:250px;
 }
 
 .product-card {
     height: 550px;
+    margin-bottom:30px;
 }
 
 .title {
