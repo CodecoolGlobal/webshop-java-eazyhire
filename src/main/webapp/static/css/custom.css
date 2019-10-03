@@ -60,3 +60,24 @@
 {
     margin: 0 0 11px;
 }
+.header
+{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url("/static/img/city.jpg");
+    height: 50%;
+
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    color: white;
+}
+
+
+
+
+.title
+{
+    background-color: darkcyan;
+    background-blend-mode: overlay;
+}
