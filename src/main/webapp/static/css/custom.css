@@ -95,6 +95,13 @@
     display: grid;
 }
 
+.product-image {
+    height:250px
+}
+
+.product-card {
+    height: 550px;
+}
 
 
 
