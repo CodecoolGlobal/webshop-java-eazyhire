@@ -89,6 +89,12 @@
     font-size: large;
 }
 
+.container {
+    padding-top: 80px;
+    padding-bottom: 150px;
+    display: grid;
+}
+
 
 
 
