@@ -27,6 +27,28 @@ public class Order {
         items.add(new LineItem(product, 1));
     }
 
+    /**
+     * Set quantity for a product already in the Order.
+     * @param productId id of the product
+     * @param quantity new quantity
+     */
+    public void setQuantityForProduct(int productId, int quantity) {
+        for (LineItem item : items) {
+            if (item.getProduct().getId() == productId) {
+                if (quantity == 0) {
+                    removeItem(item);
+                } else {
+                    item.setQuantity(quantity);
+                }
+                return;
+            }
+        }
+    }
+
+    private void removeItem(LineItem item) {
+        items.remove(item);
+    }
+
     public int getId() {
         return id;
     }

@@ -36,28 +36,38 @@
 <body>
 <div th:replace="header.html :: copy"></div>
 
-<div class="container" id="cart" th:if="${order != null}">
+<a href="/">
+    <button>Back to Store</button>
+</a>
+
+<div class="container" id="cart" th:if="${order != null && order.getSumQuantity() > 0}">
     <table class="table">
         <thead>
-        </tr>
+        <tr>
             <th scope="col">Product name</th>
             <th scope="col">Unit price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Subtotal price</th>
-        <tr>
+        </tr>
         </thead>
         <tbody th:each="item,iterStat : ${order.getItems()}">
         <tr>
             <td th:text="${item.getProduct().getName()}"></td>
             <td th:text="${item.getProduct().getPrice()}"></td>
-            <td th:text="${item.getQuantity()}"></td>
+            <td>
+                <form action="/cart" method="post">
+                    <input type="number" name="quantity" th:value="${item.getQuantity()}" min="0">
+                    <input type="hidden" name="productId" th:value="${item.getProduct().getId()}">
+                    <button type="submit">Modify</button>
+                </form>
+            </td>
             <td th:text="${item.getTotalPriceString()}"></td>
         </tr>
         </tbody>
     </table>
     <h2 class="card-text" th:text="${'Sum price: ' + order.getTotalPriceString()}">Sum price</h2>
 </div>
-<h2 class="container" th:if="${order == null}">No items yet in the cart.</h2>
+<h2 class="container" th:if="${order == null || order.getSumQuantity() == 0}">No items yet in the cart.</h2>
 
 
 <div th:replace="footer.html :: copy"></div>

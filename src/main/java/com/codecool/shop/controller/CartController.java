@@ -7,7 +7,6 @@ import com.codecool.shop.model.Order;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +30,12 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int productId = Integer.parseInt(req.getParameter("productId"));
+        int newQuantity = Integer.parseInt(req.getParameter("quantity"));
+        System.out.println("Modify quantity, productId: " + productId + ", quantity: " + newQuantity);
+        OrderDao orderDao = OrderDaoMem.getInstance();
+        Order currentOrder = orderDao.find(1);
+        currentOrder.setQuantityForProduct(productId, newQuantity);
 
         doGet(req, resp);
     }
