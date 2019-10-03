@@ -3,7 +3,7 @@
 <body>
 
 <div th:fragment="copy">
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center header">
         <h1>Codecool Shop</h1>
         <p class="cart-sumquantity" th:attr="data-sumquantity=${sumquantitiy}" th:if="${sumquantitiy != null}" th:text="${'Cart: ' + sumquantitiy}"></p>
     </div>
