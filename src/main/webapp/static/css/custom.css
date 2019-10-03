@@ -103,6 +103,14 @@
     height: 550px;
 }
 
+.title {
+    margin-top: 50px;
+    display: inline-block;
+}
+ body {
+     text-align: center
+ }
+
 
 
 
