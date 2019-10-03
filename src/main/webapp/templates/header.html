@@ -16,7 +16,7 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav" th:each=" category,iterStat : ${categories}">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" th:attr="href='/?category=' + ${category.id}" th:text="${category.name}">Category Title</a>
                 </li>
             </ul>
