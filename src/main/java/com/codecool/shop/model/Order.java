@@ -27,6 +27,7 @@ public class Order {
         items.add(new LineItem(product, 1));
     }
 
+
     public int getId() {
         return id;
     }
