@@ -78,7 +78,7 @@ public class Order {
     }
 
     public String getTotalPriceString() {
-        return getTotalPrice() + " " + currency.toString();
+        return getTotalPrice() + " " + currency.toString() + "/month";
     }
 
     @Override

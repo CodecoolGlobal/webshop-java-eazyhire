@@ -38,9 +38,9 @@ public class Initializer implements ServletContextListener {
         productCategoryDataStore.add(backoffice);
 
         //setting up products and printing it
-        productDataStore.add(new Product("JAVA developer", 500, "USD", "Best java developers on the market, with unittest experience.", developer, codecool));
-        productDataStore.add(new Product("PHP developer", 479, "USD", "Need any PHP developer? Here you can find the ultimate geniuses of Elte's IT faculty.", developer, elte));
-        productDataStore.add(new Product("Marketing Manager", 89, "USD", "Makes your company look fabololuos", backoffice, corvinus));
-        productDataStore.add(new Product("Sales ", 89, "USD", "They can sell anything, even your awful product", backoffice, corvinus));
+        productDataStore.add(new Product("JAVA developer", 500000, "HUF", "Best java developers on the market, with unit test experience.", developer, codecool));
+        productDataStore.add(new Product("PHP developer", 479000, "HUF", "Need any PHP developer? Here you can find the ultimate geniuses of Elte's IT faculty.", developer, elte));
+        productDataStore.add(new Product("Marketing Manager", 890000, "HUF", "Makes your company look fabololuos", backoffice, corvinus));
+        productDataStore.add(new Product("Sales ", 990000, "HUF", "They can sell anything, even your awful product", backoffice, corvinus));
     }
 }
