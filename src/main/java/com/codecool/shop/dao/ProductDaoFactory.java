@@ -2,7 +2,6 @@ package com.codecool.shop.dao;
 
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class ProductDaoFactory {
     private static String daoConfig = "mem";
@@ -11,9 +10,9 @@ public class ProductDaoFactory {
         if (daoConfig.equals("mem")) {
          return ProductDaoMem.getInstance();
         }
-        else {
-            throw new NotImplementedException();
-        }
 
+        else {
+            throw new RuntimeException();
+        }
     }
 }
