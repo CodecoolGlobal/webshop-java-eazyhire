@@ -65,7 +65,18 @@ public class ProductCategoryDaoDB implements ProductCategoryDao {
 
     @Override
     public void remove(int id) {
-
+        String query = "" +
+                "DELETE FROM product_category " +
+                "WHERE id = ?;";
+        try (
+                Connection connection = dbCreator.getConnection();
+                PreparedStatement ps = connection.prepareStatement(query);
+        ) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
