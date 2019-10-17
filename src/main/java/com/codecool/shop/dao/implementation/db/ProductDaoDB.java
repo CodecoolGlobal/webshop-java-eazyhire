@@ -112,18 +112,24 @@ public class ProductDaoDB implements ProductDao {
 
     @Override
     public List<Product> getBy(Supplier supplier) {
-        return null;
+        String query = "SELECT * FROM product " +
+                "WHERE category_id = ?;";
+        return getProductsByQueryAndParam(query, supplier.getId());
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
         String query = "SELECT * FROM product " +
                 "WHERE category_id = ?;";
+        return getProductsByQueryAndParam(query, productCategory.getId());
+    }
+
+    private List<Product> getProductsByQueryAndParam(String query, int queryParam) {
         try (
                 Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ){
-            ps.setInt(1, productCategory.getId());
+            ps.setInt(1, queryParam);
             ResultSet rs = ps.executeQuery();
 
             List<Product> products = new ArrayList<>();
