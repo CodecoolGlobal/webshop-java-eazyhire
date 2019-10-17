@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCategoryDaoDB implements ProductCategoryDao {
@@ -49,18 +50,22 @@ public class ProductCategoryDaoDB implements ProductCategoryDao {
             ResultSet rs = ps.executeQuery();
             rs.next();
 
-            ProductCategory found = new ProductCategory(
-                    rs.getString("name"),
-                    rs.getString("department"),
-                    rs.getString("description")
-            );
-            found.setId(rs.getInt("id"));
-
-            return found;
+            return getProductCategoryFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private ProductCategory getProductCategoryFromResultSet(ResultSet rs) throws SQLException {
+        ProductCategory productCategory = new ProductCategory(
+                rs.getString("name"),
+                rs.getString("department"),
+                rs.getString("description")
+        );
+        productCategory.setId(rs.getInt("id"));
+
+        return productCategory;
     }
 
     @Override
@@ -81,6 +86,20 @@ public class ProductCategoryDaoDB implements ProductCategoryDao {
 
     @Override
     public List<ProductCategory> getAll() {
+        String query = "SELECT * FROM product_category;";
+        try {
+            ResultSet rs = dbCreator.executeQuery(query);
+
+            List<ProductCategory> productCategories = new ArrayList<>();
+            while (rs.next()) {
+                ProductCategory pc = getProductCategoryFromResultSet(rs);
+                productCategories.add(pc);
+            }
+            return productCategories;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
+
