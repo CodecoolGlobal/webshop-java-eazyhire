@@ -51,22 +51,26 @@ public class ProductDaoDB implements ProductDao {
         ) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            ProductCategoryDao pcd = new ProductCategoryDaoDB();
-            SupplierDao sd = new SupplierDaoDB();
-            rs.next();
-            Product found = new Product(
-                    rs.getString("name"),
-                    rs.getFloat("def_price"),
-                    rs.getString("def_currency"),
-                    rs.getString("description"),
-                    pcd.find(rs.getInt("category_id")),
-                    sd.find(rs.getInt("supplier_id"))
-            );
-            return found;
+            return getProductFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private Product getProductFromResultSet(ResultSet rs) throws SQLException {
+        ProductCategoryDao pcd = new ProductCategoryDaoDB();
+        SupplierDao sd = new SupplierDaoDB();
+        rs.next();
+        Product product = new Product(
+                rs.getString("name"),
+                rs.getFloat("def_price"),
+                rs.getString("def_currency"),
+                rs.getString("description"),
+                pcd.find(rs.getInt("category_id")),
+                sd.find(rs.getInt("supplier_id"))
+        );
+        return product;
     }
 
 
