@@ -1,7 +1,6 @@
 package com.codecool.shop.config;
 
 import com.codecool.shop.dao.*;
-import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -17,7 +16,7 @@ public class Initializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         DaoUtil.setup();
 
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoFactory.create();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoFactory.create();
         SupplierDao supplierDataStore = SupplierDaoFactory.create();
 
