@@ -23,5 +23,7 @@ class ProductCategoryDaoDBTest {
 
         int newId = testProductCategory.getId();
         assertEquals(testProductCategory.getName(), productCategoryDao.find(newId).getName());
+        assertEquals(testProductCategory.getDepartment(), productCategoryDao.find(newId).getDepartment());
+        assertEquals(testProductCategory.getDescription(), productCategoryDao.find(newId).getDescription());
     }
 }

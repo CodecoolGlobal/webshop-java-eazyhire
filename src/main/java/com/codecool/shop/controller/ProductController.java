@@ -1,10 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.ProductDaoFactory;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.memory.OrderDaoMem;
 import com.codecool.shop.dao.implementation.memory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
@@ -27,7 +24,7 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ProductDao productDataStore = ProductDaoFactory.create();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoFactory.create();
         OrderDao orderDataStore = OrderDaoMem.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
