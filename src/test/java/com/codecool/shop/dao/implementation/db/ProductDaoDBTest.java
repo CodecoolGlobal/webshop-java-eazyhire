@@ -19,9 +19,9 @@ class ProductDaoDBTest {
     }
 
     @Test
-    void add() {
-        ProductCategory productCategory = new ProductCategoryDaoDB().find(0);
-        Supplier supplier = new SupplierDaoDB().find(0);
+    void add_nameEquals() {
+        ProductCategory productCategory = new ProductCategoryDaoDB().find(1);
+        Supplier supplier = new SupplierDaoDB().find(1);
         Product product = new Product(
                 "Test Name",
                 1000,
