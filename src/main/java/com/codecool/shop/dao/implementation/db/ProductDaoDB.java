@@ -51,6 +51,7 @@ public class ProductDaoDB implements ProductDao {
         ) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
+            rs.next();
             return getProductFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,7 +62,6 @@ public class ProductDaoDB implements ProductDao {
     private Product getProductFromResultSet(ResultSet rs) throws SQLException {
         ProductCategoryDao pcd = new ProductCategoryDaoDB();
         SupplierDao sd = new SupplierDaoDB();
-        rs.next();
         Product product = new Product(
                 rs.getString("name"),
                 rs.getFloat("def_price"),
@@ -96,27 +96,9 @@ public class ProductDaoDB implements ProductDao {
         try {
             ResultSet rs = dbCreator.executeQuery(query);
 
-            // TODO
-            ProductCategory testCategory = new ProductCategory(
-                    "test prod cat",
-                    "test department",
-                    "decsription of cat"
-            );
-            Supplier testSupplier = new Supplier(
-                    "test supplier",
-                    "test desc of supp"
-            );
-
             List<Product> products = new ArrayList<>();
             while (rs.next()) {
-                Product product = new Product(
-                        rs.getString("name"),
-                        rs.getFloat("def_price"),
-                        rs.getString("def_currency"),
-                        rs.getString("description"),
-                        testCategory,
-                        testSupplier
-                );
+                Product product = getProductFromResultSet(rs);
                 products.add(product);
             }
             return products;
