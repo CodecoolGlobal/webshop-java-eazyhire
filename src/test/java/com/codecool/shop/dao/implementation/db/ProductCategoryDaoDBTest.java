@@ -12,7 +12,7 @@ class ProductCategoryDaoDBTest {
     @BeforeEach
     void resetDB(){
         DbCreator dbCreator = new DbCreator();
-        dbCreator.executeUpdateFromFile("/src/main/java/com/codecool/shop/dao/implementation/db/sql/db_init.sql");
+        dbCreator.executeUpdateFromFile("src/main/java/com/codecool/shop/dao/implementation/db/sql/db_init.sql");
 
     }
 
