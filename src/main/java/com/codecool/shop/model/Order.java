@@ -8,7 +8,9 @@ public class Order {
 
     private List<LineItem> items;
     private int id;
-    private Currency currency;
+    private Currency currency = Currency.getInstance("HUF");
+
+    public Order(){}
 
 
     public Order(Product product) {
