@@ -1,12 +1,11 @@
 package com.codecool.shop.dao;
 
+import com.codecool.shop.config.Configs;
 import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 
 public class ProductDaoFactory {
-    private static String daoConfig = "mem";
-
     public static ProductDao create(){
-        if (daoConfig.equals("mem")) {
+        if (Configs.dbType == Configs.DbType.MEM) {
          return ProductDaoMem.getInstance();
         } else {
             throw new RuntimeException();
