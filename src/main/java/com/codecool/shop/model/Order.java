@@ -6,17 +6,28 @@ import java.util.List;
 
 public class Order {
 
-    private List<LineItem> items;
+    private List<LineItem> items = new ArrayList<>();
     private int id;
     private Currency currency = Currency.getInstance("HUF");
 
     public Order(){}
 
-
     public Order(Product product) {
-        this.items = new ArrayList<>();
         items.add(new LineItem(product, 1));
         currency = product.getDefaultCurrency();
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+
+    public void setItems(List<LineItem> items) {
+        this.items = items;
     }
 
     public void addProduct(Product product) {

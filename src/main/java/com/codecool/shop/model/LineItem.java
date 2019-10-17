@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 
 public class LineItem {
+    private int id;
     private Product product;
     private int quantity;
 
@@ -55,6 +56,14 @@ public class LineItem {
                 "quantity=" + quantity +
                 ", product=" + product +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
 

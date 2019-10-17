@@ -2,9 +2,6 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.*;
-import com.codecool.shop.dao.implementation.memory.OrderDaoMem;
-import com.codecool.shop.dao.implementation.memory.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -25,7 +22,7 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ProductDao productDataStore = ProductDaoFactory.create();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoFactory.create();
-        OrderDao orderDataStore = OrderDaoMem.getInstance();
+        OrderDao orderDataStore = OrderDaoFactory.create();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -56,9 +53,10 @@ public class ProductController extends HttpServlet {
 
         String productid = req.getParameter("productId");
         int productId = Integer.parseInt(productid);
-        ProductDao productDao = ProductDaoMem.getInstance();
+        ProductDao productDao = ProductDaoFactory.create();
         Product product = productDao.find(productId);
-        OrderDao orderDao = OrderDaoMem.getInstance();
+
+        OrderDao orderDao = OrderDaoFactory.create();
         Order currentOrder = orderDao.find(1);
         if (currentOrder == null) {
             currentOrder = new Order(product);
