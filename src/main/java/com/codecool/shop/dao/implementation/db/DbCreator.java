@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.db;
 
 import org.postgresql.copy.CopyManager;
 import org.postgresql.core.BaseConnection;
@@ -9,14 +9,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 
-public class dbCreator {
+public class DbCreator {
     private static final String DATABASE = System.getenv("DB_WEB");
-    private static final String DB_USER = System.getenv("POSTGRES_DB_USER");
-    private static final String DB_PASSWORD = System.getenv("POSTGRES_DB_PASSWORD");
-
-    public dbCreator() {
+    private static final String DB_USER = System.getenv("DB_USER");
+    private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
+    /*
+    public DbCreator() {
         executeUpdateFromFile("src/main/resources/init_db.sql");
     }
+     */
 
     public Connection getConnection() {
         try {

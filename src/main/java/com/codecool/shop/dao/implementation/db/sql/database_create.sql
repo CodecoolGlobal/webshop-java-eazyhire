@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS line_item;
 DROP TABLE IF EXISTS cart;
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS supplier;
 DROP TABLE IF EXISTS product_category;
@@ -9,6 +8,7 @@ CREATE TABLE product_category
 (
     id          SERIAL PRIMARY KEY,
     name        VARCHAR NOT NULL,
+    department  VARCHAR NOT NULL,
     description VARCHAR
 );
 
@@ -30,19 +30,10 @@ CREATE TABLE product
     def_currency VARCHAR
 );
 
-CREATE TABLE users
-(
-    id       SERIAL PRIMARY KEY,
-    name     VARCHAR NOT NULL,
-    password VARCHAR NOT NULL,
-    email    VARCHAR NOT NULL
-);
-
 CREATE TABLE cart
 (
     id       SERIAL PRIMARY KEY,
-    currency VARCHAR NOT NULL,
-    user_id  INTEGER REFERENCES users(id) ON DELETE CASCADE
+    currency VARCHAR NOT NULL
 );
 
 CREATE TABLE line_item

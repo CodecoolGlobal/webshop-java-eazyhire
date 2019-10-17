@@ -1,7 +1,6 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.model.Product;
+import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 
 public class ProductDaoFactory {
     private static String daoConfig = "mem";
