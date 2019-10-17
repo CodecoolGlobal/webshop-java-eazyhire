@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoDB implements ProductDao {
-    DbCreator dbCreator = new DbCreator();
+    private DbCreator dbCreator = new DbCreator();
 
     @Override
     public void add(Product product) {

@@ -1,12 +1,14 @@
 package com.codecool.shop.dao.implementation.db;
 
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Supplier;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierDaoDB implements SupplierDao {
@@ -47,17 +49,21 @@ public class SupplierDaoDB implements SupplierDao {
             ResultSet rs = ps.executeQuery();
             rs.next();
 
-            Supplier found = new Supplier(
-                    rs.getString("name"),
-                    rs.getString("description")
-            );
-            found.setId(rs.getInt("id"));
-
-            return found;
+            return getSupplierFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private Supplier getSupplierFromResultSet(ResultSet rs) throws SQLException {
+        Supplier supplier = new Supplier(
+                rs.getString("name"),
+                rs.getString("description")
+        );
+        supplier.setId(rs.getInt("id"));
+
+        return supplier;
     }
 
     @Override
@@ -78,6 +84,20 @@ public class SupplierDaoDB implements SupplierDao {
 
     @Override
     public List<Supplier> getAll() {
+        String query = "SELECT * FROM supplier;";
+        try {
+            ResultSet rs = dbCreator.executeQuery(query);
+
+            List<Supplier> suppliers = new ArrayList<>();
+            while (rs.next()) {
+                Supplier supplier = getSupplierFromResultSet(rs);
+                suppliers.add(supplier);
+            }
+            return suppliers;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 }
