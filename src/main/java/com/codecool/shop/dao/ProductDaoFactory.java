@@ -5,12 +5,10 @@ import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 public class ProductDaoFactory {
     private static String daoConfig = "mem";
 
-    public static ProductDao createProductDao(){
+    public static ProductDao create(){
         if (daoConfig.equals("mem")) {
          return ProductDaoMem.getInstance();
-        }
-
-        else {
+        } else {
             throw new RuntimeException();
         }
     }
