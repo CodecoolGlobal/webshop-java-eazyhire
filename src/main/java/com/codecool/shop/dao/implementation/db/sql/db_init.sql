@@ -1,17 +1,19 @@
-TRUNCATE supplier CASCADE;
+TRUNCATE TABLE supplier CASCADE;
+TRUNCATE TABLE product_category CASCADE;
+TRUNCATE TABLE product CASCADE;
+TRUNCATE TABLE cart CASCADE;
+TRUNCATE TABLE line_item CASCADE;
+
+
 
 INSERT INTO supplier (id, name, description) VALUES (1, 'ELTE', 'Top hungarian University');
 INSERT INTO supplier (id, name, description) VALUES (2, 'Codecool', 'Best private school for those who want to learn coding');
 INSERT INTO supplier (id, name, description) VALUES (3, 'Corvinus', 'Accounting and business school');
 
-
-TRUNCATE product_category CASCADE;
-
 INSERT INTO product_category (id, name, department, description) VALUES (1, 'Developer', 'IT', 'Responsible for generating code');
 INSERT INTO product_category (id, name, department, description) VALUES (2, 'Backoffice', 'IT', 'Responsible for administration');
 
 
-TRUNCATE product CASCADE;
 
 INSERT INTO product (category_id, supplier_id, name, def_price, def_currency, description)
     VALUES (1, 2, 'Full stack developer', 1000000, 'HUF', 'Best full stack developers on the market, with unit testing experience.');

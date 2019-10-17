@@ -8,18 +8,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ProductCategoryDaoDBTest {
+    private ProductCategoryDao productCategoryDao;
 
     @BeforeEach
-    void resetDB(){
-        DbCreator dbCreator = new DbCreator();
-        dbCreator.executeUpdateFromFile("src/main/java/com/codecool/shop/dao/implementation/db/sql/db_init.sql");
-
+    void setup(){
+        DbUtil.resetDB();
+        productCategoryDao = new ProductCategoryDaoDB();
     }
 
     @Test
     void addAndFind_nameEquals() {
         ProductCategory testProductCategory = new ProductCategory("test ProductCategory", "test_department","test desc of supp");
-        ProductCategoryDao productCategoryDao = new ProductCategoryDaoDB();
         productCategoryDao.add(testProductCategory);
 
         int newId = testProductCategory.getId();

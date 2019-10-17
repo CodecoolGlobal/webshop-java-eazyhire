@@ -9,17 +9,20 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 
-public class DbCreator {
+public class DbUtil {
     private static final String DATABASE = System.getenv("DB_WEB");
     private static final String DB_USER = System.getenv("DB_USER");
     private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
-    /*
-    public DbCreator() {
-        executeUpdateFromFile("src/main/resources/init_db.sql");
-    }
-     */
 
-    public Connection getConnection() {
+    public static void createDb(){
+        executeUpdateFromFile("src/main/java/com/codecool/shop/dao/implementation/db/sql/database_create.sql");
+    }
+
+    public static void resetDB(){
+        executeUpdateFromFile("src/main/java/com/codecool/shop/dao/implementation/db/sql/db_init.sql");
+    }
+
+    public static Connection getConnection() {
         try {
             return DriverManager.getConnection(
                     DATABASE,
@@ -32,7 +35,7 @@ public class DbCreator {
         return null;
     }
 
-    public void executeUpdate(String query) throws SQLException {
+    public static void executeUpdate(String query) throws SQLException {
         try (Connection connection = getConnection()) {
 
             PreparedStatement statement = connection.prepareStatement(query);
@@ -43,7 +46,7 @@ public class DbCreator {
         }
     }
 
-    public ResultSet executeQuery(String query) throws SQLException {
+    public static ResultSet executeQuery(String query) throws SQLException {
         try (Connection connection = getConnection()) {
 
             PreparedStatement statement = connection.prepareStatement(query);
@@ -55,7 +58,7 @@ public class DbCreator {
         return null;
     }
 
-    public void copyDataFromFile(String tableName, String filePath) throws SQLException {
+    public static void copyDataFromFile(String tableName, String filePath) throws SQLException {
         FileReader fileReader = null;
 
         try (Connection connection = getConnection()) {
@@ -79,7 +82,7 @@ public class DbCreator {
         }
     }
 
-    public void executeUpdateFromFile(String filePath) {
+    public static void executeUpdateFromFile(String filePath) {
         String query = "";
         try {
             query = new String(Files.readAllBytes(Paths.get(filePath)));

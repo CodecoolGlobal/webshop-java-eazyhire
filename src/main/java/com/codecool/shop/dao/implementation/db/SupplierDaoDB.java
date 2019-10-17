@@ -1,7 +1,6 @@
 package com.codecool.shop.dao.implementation.db;
 
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Supplier;
 
 import java.sql.Connection;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierDaoDB implements SupplierDao {
-    DbCreator dbCreator = new DbCreator();
 
     @Override
     public void add(Supplier supplier) {
@@ -21,7 +19,7 @@ public class SupplierDaoDB implements SupplierDao {
                 "VALUES (?, ?)" +
                 "RETURNING id; ";
         try (
-                Connection connection = dbCreator.getConnection();
+                Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ) {
             ps.setString(1, supplier.getName());
@@ -41,15 +39,14 @@ public class SupplierDaoDB implements SupplierDao {
                 "SELECT * FROM supplier " +
                 "WHERE id = ?;";
         try (
-                Connection connection = dbCreator.getConnection();
+                Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ) {
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
-            rs.next();
-
-            return getSupplierFromResultSet(rs);
+            if (rs.next())
+                return getSupplierFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -72,7 +69,7 @@ public class SupplierDaoDB implements SupplierDao {
                 "DELETE FROM supplier " +
                 "WHERE id = ?;";
         try (
-                Connection connection = dbCreator.getConnection();
+                Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ) {
             ps.setInt(1, id);
@@ -86,7 +83,7 @@ public class SupplierDaoDB implements SupplierDao {
     public List<Supplier> getAll() {
         String query = "SELECT * FROM supplier;";
         try {
-            ResultSet rs = dbCreator.executeQuery(query);
+            ResultSet rs = DbUtil.executeQuery(query);
 
             List<Supplier> suppliers = new ArrayList<>();
             while (rs.next()) {

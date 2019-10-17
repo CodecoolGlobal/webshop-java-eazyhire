@@ -5,20 +5,16 @@ import com.codecool.shop.model.Supplier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class SupplierDaoDBTest {
     private SupplierDao supplierDao;
 
     @BeforeEach
     void setUp() {
-        resetDB();
+        DbUtil.resetDB();
         supplierDao = new SupplierDaoDB();
-    }
-
-    void resetDB(){
-        DbCreator dbCreator = new DbCreator();
-        dbCreator.executeUpdateFromFile("src/main/java/com/codecool/shop/dao/implementation/db/sql/db_init.sql");
     }
 
     @Test

@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoDB implements ProductDao {
-    private DbCreator dbCreator = new DbCreator();
 
     @Override
     public void add(Product product) {
         String query = "" +
-                "INSERT INTO product (category_id, supplier_id, name, description, def_price, def_currency)\n" +
-                "VALUES (?, ?, ?, ?, ?, ?);";
+                "INSERT INTO product (category_id, supplier_id, name, description, def_price, def_currency) " +
+                "VALUES (?, ?, ?, ?, ?, ?) " +
+                "RETURNING id; ";
         try (
-                Connection connection = dbCreator.getConnection();
+                Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ) {
             ps.setInt(1, product.getProductCategory().getId());
@@ -33,8 +33,9 @@ public class ProductDaoDB implements ProductDao {
             ps.setFloat(5, product.getDefaultPrice());
             ps.setString(6, product.getDefaultCurrency().toString());
 
-            ps.executeUpdate();
-
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            product.setId(rs.getInt("id"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,13 +47,13 @@ public class ProductDaoDB implements ProductDao {
                 "SELECT * FROM product " +
                 "WHERE id = ?;";
         try (
-                Connection connection = dbCreator.getConnection();
+                Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            return getProductFromResultSet(rs);
+            if (rs.next())
+                return getProductFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,7 +81,7 @@ public class ProductDaoDB implements ProductDao {
                 "DELETE FROM product " +
                 "WHERE id = ?;";
         try (
-                Connection connection = dbCreator.getConnection();
+                Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ) {
             ps.setInt(1, id);
@@ -94,7 +95,7 @@ public class ProductDaoDB implements ProductDao {
     public List<Product> getAll() {
         String query = "SELECT * FROM product";
         try {
-            ResultSet rs = dbCreator.executeQuery(query);
+            ResultSet rs = DbUtil.executeQuery(query);
 
             List<Product> products = new ArrayList<>();
             while (rs.next()) {

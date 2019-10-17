@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCategoryDaoDB implements ProductCategoryDao {
-    DbCreator dbCreator = new DbCreator();
 
     @Override
     public void add(ProductCategory category) {
@@ -20,7 +19,7 @@ public class ProductCategoryDaoDB implements ProductCategoryDao {
                 "VALUES (?, ?, ?)" +
                 "RETURNING id; ";
         try (
-                Connection connection = dbCreator.getConnection();
+                Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ) {
             ps.setString(1, category.getName());
@@ -42,15 +41,14 @@ public class ProductCategoryDaoDB implements ProductCategoryDao {
                 "SELECT * FROM product_category " +
                 "WHERE id = ?;";
         try (
-                Connection connection = dbCreator.getConnection();
+                Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ) {
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
-            rs.next();
-
-            return getProductCategoryFromResultSet(rs);
+            if (rs.next())
+                return getProductCategoryFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -74,7 +72,7 @@ public class ProductCategoryDaoDB implements ProductCategoryDao {
                 "DELETE FROM product_category " +
                 "WHERE id = ?;";
         try (
-                Connection connection = dbCreator.getConnection();
+                Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ) {
             ps.setInt(1, id);
@@ -88,7 +86,7 @@ public class ProductCategoryDaoDB implements ProductCategoryDao {
     public List<ProductCategory> getAll() {
         String query = "SELECT * FROM product_category;";
         try {
-            ResultSet rs = dbCreator.executeQuery(query);
+            ResultSet rs = DbUtil.executeQuery(query);
 
             List<ProductCategory> productCategories = new ArrayList<>();
             while (rs.next()) {
