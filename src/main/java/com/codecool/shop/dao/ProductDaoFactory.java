@@ -1,10 +1,18 @@
 package com.codecool.shop.dao;
 
 import com.codecool.shop.config.Configs;
+import com.codecool.shop.dao.implementation.db.ProductDaoDB;
 import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 
 public class ProductDaoFactory {
     public static ProductDao create(){
-         return ProductDaoMem.getInstance();
+        if (Configs.dbType == Configs.DbType.MEM) {
+            return ProductDaoMem.getInstance();
+        } if (Configs.dbType == Configs.DbType.JDBC) {
+            return new ProductDaoDB();
+        } else {
+            throw new RuntimeException();
+        }
+
     }
 }

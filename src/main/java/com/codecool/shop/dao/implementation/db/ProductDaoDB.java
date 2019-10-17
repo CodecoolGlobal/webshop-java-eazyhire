@@ -71,6 +71,7 @@ public class ProductDaoDB implements ProductDao {
                 pcd.find(rs.getInt("category_id")),
                 sd.find(rs.getInt("supplier_id"))
         );
+        product.setId(rs.getInt("id"));
         return product;
     }
 
@@ -93,7 +94,7 @@ public class ProductDaoDB implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        String query = "SELECT * FROM product";
+        String query = "SELECT * FROM product;";
         try {
             ResultSet rs = DbUtil.executeQuery(query);
 
@@ -116,6 +117,26 @@ public class ProductDaoDB implements ProductDao {
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
+        String query = "SELECT * FROM product " +
+                "WHERE category_id = ?;";
+        try (
+                Connection connection = DbUtil.getConnection();
+                PreparedStatement ps = connection.prepareStatement(query);
+        ){
+            ps.setInt(1, productCategory.getId());
+            ResultSet rs = ps.executeQuery();
+
+            List<Product> products = new ArrayList<>();
+            while (rs.next()) {
+                Product product = getProductFromResultSet(rs);
+                products.add(product);
+            }
+            return products;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
+
+
 }
