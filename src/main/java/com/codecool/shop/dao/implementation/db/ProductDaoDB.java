@@ -1,7 +1,8 @@
 package com.codecool.shop.dao.implementation.db;
 
+import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.db.DbCreator;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -41,8 +42,33 @@ public class ProductDaoDB implements ProductDao {
 
     @Override
     public Product find(int id) {
+        String query = "" +
+                "SELECT * FROM product " +
+                "WHERE id = ?;";
+        try (
+                Connection connection = dbCreator.getConnection();
+                PreparedStatement ps = connection.prepareStatement(query);
+        ) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            ProductCategoryDao pcd = new ProductCategoryDaoDB();
+            SupplierDao sd = new SupplierDaoDB();
+            rs.next();
+            Product found = new Product(
+                    rs.getString("name"),
+                    rs.getFloat("def_price"),
+                    rs.getString("def_currency"),
+                    rs.getString("description"),
+                    pcd.find(rs.getInt("category_id")),
+                    sd.find(rs.getInt("supplier_id"))
+            );
+            return found;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
+
 
     @Override
     public void remove(int id) {
