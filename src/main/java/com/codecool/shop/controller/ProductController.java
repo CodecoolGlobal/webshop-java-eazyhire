@@ -21,7 +21,7 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ProductDao productDataStore = ProductDaoFactory.create();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoFactory.create();
+        BaseDao<ProductCategory> productCategoryDataStore = ProductCategoryDaoFactory.create();
         OrderDao orderDataStore = OrderDaoFactory.create();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());

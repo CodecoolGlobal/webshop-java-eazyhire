@@ -1,7 +1,6 @@
 package com.codecool.shop.dao.implementation.db;
 
 import com.codecool.shop.dao.BaseDao;
-import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -61,7 +60,7 @@ public class ProductDaoDB implements ProductDao {
     }
 
     private Product getProductFromResultSet(ResultSet rs) throws SQLException {
-        ProductCategoryDao pcd = new ProductCategoryDaoDB();
+        BaseDao<ProductCategory> pcd = new ProductCategoryDaoDB();
         BaseDao<Supplier> sd = new SupplierDaoDB();
         Product product = new Product(
                 rs.getString("name"),

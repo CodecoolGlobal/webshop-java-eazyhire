@@ -1,6 +1,6 @@
 package com.codecool.shop.dao.implementation.db;
 
-import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.dao.BaseDao;
 import com.codecool.shop.model.ProductCategory;
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryDaoDB implements ProductCategoryDao {
+public class ProductCategoryDaoDB implements BaseDao<ProductCategory> {
 
     @Override
     public void add(ProductCategory category) {
