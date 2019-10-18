@@ -1,6 +1,6 @@
 package com.codecool.shop.dao.implementation.db;
 
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.BaseDao;
 import com.codecool.shop.model.Supplier;
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupplierDaoDB implements SupplierDao {
+public class SupplierDaoDB implements BaseDao<Supplier> {
 
     @Override
     public void add(Supplier supplier) {

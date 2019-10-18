@@ -18,7 +18,7 @@ public class Initializer implements ServletContextListener {
 
         ProductDao productDataStore = ProductDaoFactory.create();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoFactory.create();
-        SupplierDao supplierDataStore = SupplierDaoFactory.create();
+        BaseDao<Supplier> supplierDataStore = SupplierDaoFactory.create();
 
         //setting up a new supplier
         Supplier elte = new Supplier("Elte", "Top hungarian University");

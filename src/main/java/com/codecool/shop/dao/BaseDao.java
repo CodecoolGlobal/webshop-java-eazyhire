@@ -4,11 +4,9 @@ import com.codecool.shop.model.Supplier;
 
 import java.util.List;
 
-public interface SupplierDao {
-
-    void add(Supplier supplier);
-    Supplier find(int id);
+public interface BaseDao<T> {
+    void add(T t);
+    T find(int id);
     void remove(int id);
-
-    List<Supplier> getAll();
+    List<T> getAll();
 }

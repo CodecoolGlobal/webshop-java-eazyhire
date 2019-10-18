@@ -1,6 +1,6 @@
 package com.codecool.shop.dao.implementation.db;
 
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.BaseDao;
 import com.codecool.shop.model.Supplier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class SupplierDaoDBTest {
-    private SupplierDao supplierDao;
+    private BaseDao<Supplier> supplierDao;
 
     @BeforeEach
     void setUp() {
@@ -28,7 +28,7 @@ class SupplierDaoDBTest {
 
     @Test
     void findNonexistent_returnNull() {
-        SupplierDao supplierDao = new SupplierDaoDB();
+        BaseDao<Supplier> supplierDao = new SupplierDaoDB();
         assertNull(supplierDao.find(0));
     }
 
