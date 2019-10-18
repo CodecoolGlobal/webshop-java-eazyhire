@@ -2,7 +2,7 @@ package com.codecool.shop.dao.implementation.db;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.ProductDaoFactory;
+import com.codecool.shop.dao.factory.ProductDaoFactory;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;

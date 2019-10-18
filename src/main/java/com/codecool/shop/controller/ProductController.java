@@ -2,6 +2,9 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.factory.OrderDaoFactory;
+import com.codecool.shop.dao.factory.ProductCategoryDaoFactory;
+import com.codecool.shop.dao.factory.ProductDaoFactory;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;

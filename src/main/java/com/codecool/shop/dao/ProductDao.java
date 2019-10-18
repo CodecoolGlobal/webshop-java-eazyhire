@@ -9,5 +9,4 @@ import java.util.List;
 public interface ProductDao extends BaseDao<Product> {
     List<Product> getBy(Supplier supplier);
     List<Product> getBy(ProductCategory productCategory);
-
 }

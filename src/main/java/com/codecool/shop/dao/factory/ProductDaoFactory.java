@@ -1,6 +1,7 @@
-package com.codecool.shop.dao;
+package com.codecool.shop.dao.factory;
 
 import com.codecool.shop.config.Configs;
+import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.db.ProductDaoDB;
 import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 

@@ -1,6 +1,9 @@
 package com.codecool.shop.config;
 
 import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.factory.ProductCategoryDaoFactory;
+import com.codecool.shop.dao.factory.ProductDaoFactory;
+import com.codecool.shop.dao.factory.SupplierDaoFactory;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
