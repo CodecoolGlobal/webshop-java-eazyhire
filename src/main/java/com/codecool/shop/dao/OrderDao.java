@@ -4,12 +4,6 @@ import com.codecool.shop.model.Order;
 
 import java.util.List;
 
-public interface OrderDao {
-
-    void add(Order order);
-    Order find(int id);
-    void remove(int id);
-    List<Order> getAll();
-
+public interface OrderDao extends BaseDao<Order> {
     default void update(Order currentOrder) {}
 }
