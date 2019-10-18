@@ -2,7 +2,7 @@ package com.codecool.shop.model;
 
 
 public class LineItem {
-    private int id;
+    private Integer id;
     private Product product;
     private int quantity;
 
@@ -53,12 +53,13 @@ public class LineItem {
     @Override
     public String toString() {
         return "LineItem{" +
-                "quantity=" + quantity +
+                "id=" + id +
+                ", quantity=" + quantity +
                 ", product=" + product +
                 '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

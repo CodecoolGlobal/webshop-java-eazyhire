@@ -63,6 +63,53 @@ public class OrderDaoDB implements OrderDao {
     }
 
     @Override
+    public void update(Order currentOrder) {
+        for (LineItem lineItem : currentOrder.getItems()) {
+            if (hasProduct(currentOrder.getId(), lineItem.getProduct()))
+                updateLineItem(lineItem);
+            else
+                insertLineItem(lineItem, currentOrder.getId());
+        }
+    }
+
+    private boolean hasProduct(int orderId, Product product) {
+        String query = "" +
+                "SELECT * " +
+                "FROM line_item " +
+                "WHERE order_id = ? AND product_id = ?; ";
+        try (
+                Connection connection = DbUtil.getConnection();
+                PreparedStatement ps = connection.prepareStatement(query);
+        ) {
+            ps.setInt(1, orderId);
+            ps.setInt(2, product.getId());
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void updateLineItem(LineItem lineItem) {
+        String query = "" +
+                "UPDATE line_item " +
+                "SET quantity = ? " +
+                "WHERE product_id = ?; ";
+        try (
+                Connection connection = DbUtil.getConnection();
+                PreparedStatement ps = connection.prepareStatement(query);
+        ) {
+            ps.setInt(1, lineItem.getQuantity());
+            ps.setInt(2, lineItem.getProduct().getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public Order find(int id) {
         Order order = new Order();
         order.setItems(getLineItems(id));

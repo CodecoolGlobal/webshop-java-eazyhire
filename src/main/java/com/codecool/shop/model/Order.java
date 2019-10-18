@@ -32,7 +32,7 @@ public class Order {
 
     public void addProduct(Product product) {
         for (LineItem item : items) {
-            if (item.getProduct().equals(product)) {
+            if (item.getProduct().getId() == product.getId()) {
                 item.increaseQuantity();
                 return;
             }

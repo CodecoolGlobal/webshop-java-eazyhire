@@ -63,6 +63,7 @@ public class ProductController extends HttpServlet {
             orderDao.add(currentOrder);
         } else {
             currentOrder.addProduct(product);
+            orderDao.update(currentOrder);
         }
 
         doGet(req, resp);

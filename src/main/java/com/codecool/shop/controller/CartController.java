@@ -37,6 +37,8 @@ public class CartController extends HttpServlet {
         Order currentOrder = orderDao.find(1);
         currentOrder.setQuantityForProduct(productId, newQuantity);
 
+        orderDao.update(currentOrder);
+
         doGet(req, resp);
     }
 }
