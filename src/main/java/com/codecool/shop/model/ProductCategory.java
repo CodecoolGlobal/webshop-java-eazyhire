@@ -1,21 +1,14 @@
 package com.codecool.shop.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter @Setter
 public class ProductCategory extends BaseModel {
     private String department;
 
     public ProductCategory(String name, String department, String description) {
         super(name, description);
-        this.department = department;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
         this.department = department;
     }
 

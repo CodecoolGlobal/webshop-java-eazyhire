@@ -1,6 +1,9 @@
 package com.codecool.shop.model;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter @Setter
 public class LineItem {
     private Integer id;
     private Product product;
@@ -30,18 +33,6 @@ public class LineItem {
         return (int) getTotalPrice() + " " + product.getDefaultCurrency().toString();
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public void increaseQuantity() {
         this.quantity += 1;
     }
@@ -57,14 +48,6 @@ public class LineItem {
                 ", quantity=" + quantity +
                 ", product=" + product +
                 '}';
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }
 
