@@ -31,7 +31,8 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int productId = Integer.parseInt(req.getParameter("productId"));
-        int newQuantity = Integer.parseInt(req.getParameter("quantity"));
+        String quantity = req.getParameter("quantity");
+        int newQuantity = quantity.equals("")? 0 : Integer.parseInt(quantity);
         System.out.println("Modify quantity, productId: " + productId + ", quantity: " + newQuantity);
         OrderDao orderDao = OrderDaoFactory.create();
         Order currentOrder = orderDao.find(1);
