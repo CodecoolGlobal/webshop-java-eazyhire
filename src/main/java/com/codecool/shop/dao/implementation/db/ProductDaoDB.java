@@ -29,7 +29,7 @@ public class ProductDaoDB implements ProductDao {
             ps.setInt(2, product.getSupplier().getId());
             ps.setString(3, product.getName());
             ps.setString(4, product.getDescription());
-            ps.setFloat(5, product.getDefaultPrice());
+            ps.setDouble(5, product.getDefaultPrice());
             ps.setString(6, product.getDefaultCurrency().toString());
 
             ResultSet rs = ps.executeQuery();
@@ -64,7 +64,7 @@ public class ProductDaoDB implements ProductDao {
         BaseDao<Supplier> sd = new SupplierDaoDB();
         Product product = new Product(
                 rs.getString("name"),
-                rs.getFloat("def_price"),
+                rs.getDouble("def_price"),
                 rs.getString("def_currency"),
                 rs.getString("description"),
                 pcd.find(rs.getInt("category_id")),

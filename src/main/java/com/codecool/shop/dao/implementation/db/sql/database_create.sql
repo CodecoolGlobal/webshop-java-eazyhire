@@ -26,7 +26,7 @@ CREATE TABLE product
     supplier_id  INTEGER REFERENCES supplier (id) ON DELETE CASCADE,
     name         VARCHAR NOT NULL,
     description  VARCHAR,
-    def_price    FLOAT,
+    def_price    DOUBLE PRECISION,
     def_currency VARCHAR
 );
 

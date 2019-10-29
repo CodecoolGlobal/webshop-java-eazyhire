@@ -82,8 +82,8 @@ public class Order {
         return new ArrayList<>(items);
     }
 
-    public float getTotalPrice() {
-        float sum = 0;
+    public double getTotalPrice() {
+        double sum = 0;
         for (LineItem item : items) {
             sum += item.getTotalPrice();
         }
@@ -91,7 +91,7 @@ public class Order {
     }
 
     public String getTotalPriceString() {
-        return (int)getTotalPrice() + " " + currency.toString() + "/month";
+        return Math.round(getTotalPrice()) + " " + currency.toString() + "/month";
     }
 
     @Override

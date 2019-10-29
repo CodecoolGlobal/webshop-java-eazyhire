@@ -25,12 +25,12 @@ public class LineItem {
      *
      * @return the total price
      */
-    public float getTotalPrice() {
+    public double getTotalPrice() {
         return product.getDefaultPrice() * quantity;
     }
 
     public String getTotalPriceString() {
-        return (int) getTotalPrice() + " " + product.getDefaultCurrency().toString();
+        return Math.round(getTotalPrice()) + " " + product.getDefaultCurrency().toString();
     }
 
     public void increaseQuantity() {
