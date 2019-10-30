@@ -84,8 +84,11 @@
     font-family: "Snell Roundhand";
 }
 
-.cart-sumquantity {
+.nav-link {
     color: white;
+}
+
+.cart-sumquantity {
     font-weight: bolder;
     font-size: large;
 }
