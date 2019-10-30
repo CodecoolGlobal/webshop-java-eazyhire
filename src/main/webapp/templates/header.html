@@ -18,10 +18,12 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav" th:each=" category,iterStat : ${categories}">
                 <li class="nav-item active">
-                    <a class="nav-link" th:attr="href='/?category=' + ${category.id}" th:text="${category.name}">Category Title</a>
+                    <a class="nav-link" th:attr="href='/?category=' + ${category.id}" th:text="${category.name}">Category</a>
                 </li>
             </ul>
-            <a class="nav-link cart-sumquantity" href="/cart" th:attr="data-sumquantity=${sumquantitiy}" th:if="${sumquantitiy != null}" th:text="${'Cart: ' + sumquantitiy}">Cart</a>
+            <a class="nav-link cart-sumquantity" href="#" data-toggle="modal" data-target="#myModal">Login</a>
+            <a class="nav-link cart-sumquantity" href="/cart" th:attr="data-sumquantity=${sumquantitiy}"
+            th:if="${sumquantitiy != null}" th:text="${'Cart: ' + sumquantitiy}">Cart</a>
         </div>
     </nav>
 
