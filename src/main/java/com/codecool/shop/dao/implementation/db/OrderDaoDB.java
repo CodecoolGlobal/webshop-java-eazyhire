@@ -64,6 +64,13 @@ public class OrderDaoDB implements OrderDao {
 
     @Override
     public void update(Order currentOrder) {
+        // We expect the Order to already exist in the database.
+        // Delete Order from the database -> lineItems cascade deleted
+
+        // Insert Order with the same ID.
+
+
+
         for (LineItem lineItem : currentOrder.getItems()) {
             if (hasProduct(currentOrder.getId(), lineItem.getProduct()))
                 updateLineItem(lineItem);
@@ -92,7 +99,7 @@ public class OrderDaoDB implements OrderDao {
         return false;
     }
 
-    private void updateLineItem(LineItem lineItem) {
+    private void updateLineItem(LineItem lineItem) { // TODO
         String query = "" +
                 "UPDATE line_item " +
                 "SET quantity = ? " +
@@ -173,7 +180,18 @@ public class OrderDaoDB implements OrderDao {
 
     @Override
     public void remove(int id) {
-        // TODO
+        String query = "" +
+                "DELETE FROM cart " +
+                "WHERE id = ?; ";
+        try (
+                Connection connection = DbUtil.getConnection();
+                PreparedStatement ps = connection.prepareStatement(query);
+        ) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
