@@ -30,10 +30,20 @@ CREATE TABLE product
     def_currency VARCHAR
 );
 
+CREATE TABLE users
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR NULL,
+    password VARCHAR NOT NULL,
+    email VARCHAR
+    );
+
+
 CREATE TABLE cart
 (
     id       SERIAL PRIMARY KEY,
-    currency VARCHAR NOT NULL
+    currency VARCHAR NOT NULL,
+    session  VARCHAR
 );
 
 CREATE TABLE line_item
@@ -43,4 +53,13 @@ CREATE TABLE line_item
     quantity   INTEGER,
     order_id   INTEGER REFERENCES cart(id) ON DELETE CASCADE
 );
+
+CREATE TABLE orders
+(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE ,
+    cart_id INTEGER REFERENCES cart(id)  ON DELETE CASCADE
+);
+
+
 
