@@ -38,7 +38,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("products", productDataStore.getBy(chosenProductCategory));
         context.setVariable("chosencategory", chosenProductCategory);
 
-        final Order order = orderDataStore.find(1);
+        final Order order = ControllerUtils.getCurrentOrder(orderDataStore);
         int sumQuantity = order == null ? 0 : order.getSumQuantity();
         context.setVariable("sumquantitiy", sumQuantity);
 
@@ -53,14 +53,22 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Product product = getProductFromRequest(req);
+        addProductToCurrentOrder(product);
+        doGet(req, resp);
+    }
 
+    private Product getProductFromRequest(HttpServletRequest req) {
         String productid = req.getParameter("productId");
         int productId = Integer.parseInt(productid);
         ProductDao productDao = ProductDaoFactory.create();
-        Product product = productDao.find(productId);
+        return productDao.find(productId);
+    }
 
+    private void addProductToCurrentOrder(Product product) {
         OrderDao orderDao = OrderDaoFactory.create();
-        Order currentOrder = orderDao.find(1);
+        Order currentOrder = ControllerUtils.getCurrentOrder(orderDao);
+
         if (currentOrder == null) {
             currentOrder = new Order(product);
             orderDao.add(currentOrder);
@@ -68,8 +76,6 @@ public class ProductController extends HttpServlet {
             currentOrder.addProduct(product);
             orderDao.update(currentOrder);
         }
-
-        doGet(req, resp);
     }
 }
 
