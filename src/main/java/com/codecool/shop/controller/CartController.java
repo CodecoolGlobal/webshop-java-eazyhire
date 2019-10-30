@@ -22,7 +22,7 @@ public class CartController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         OrderDao orderDataStore = OrderDaoFactory.create();
-        final Order order = orderDataStore.find(1);
+        final Order order = ControllerUtils.getCurrentOrder(orderDataStore);
         context.setVariable("order", order);
 
         engine.process("product/cart.html", context, resp.getWriter());
@@ -35,7 +35,7 @@ public class CartController extends HttpServlet {
         int newQuantity = quantity.equals("")? 0 : Integer.parseInt(quantity);
         System.out.println("Modify quantity, productId: " + productId + ", quantity: " + newQuantity);
         OrderDao orderDao = OrderDaoFactory.create();
-        Order currentOrder = orderDao.find(1);
+        Order currentOrder = ControllerUtils.getCurrentOrder(orderDao);
         currentOrder.setQuantityForProduct(productId, newQuantity);
 
         orderDao.update(currentOrder);
