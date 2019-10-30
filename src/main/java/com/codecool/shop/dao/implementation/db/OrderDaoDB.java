@@ -19,6 +19,10 @@ public class OrderDaoDB implements OrderDao {
     @Override
     public void add(Order order) {
         insertOrder(order);
+        insertLineItemsOfOrder(order);
+    }
+
+    private void insertLineItemsOfOrder(Order order) {
         for (LineItem lineItem : order.getItems()) {
             insertLineItem(lineItem, order.getId());
         }
@@ -62,58 +66,30 @@ public class OrderDaoDB implements OrderDao {
         }
     }
 
-    @Override
-    public void update(Order currentOrder) {
-        // We expect the Order to already exist in the database.
-        // Delete Order from the database -> lineItems cascade deleted
-
-        // Insert Order with the same ID.
-
-
-
-        for (LineItem lineItem : currentOrder.getItems()) {
-            if (hasProduct(currentOrder.getId(), lineItem.getProduct()))
-                updateLineItem(lineItem);
-            else
-                insertLineItem(lineItem, currentOrder.getId());
-        }
-    }
-
-    private boolean hasProduct(int orderId, Product product) {
+    private void insertOrderWithId(Order order) {
         String query = "" +
-                "SELECT * " +
-                "FROM line_item " +
-                "WHERE order_id = ? AND product_id = ?; ";
+                "INSERT INTO cart (id, currency) " +
+                "VALUES (?, ?); ";
         try (
                 Connection connection = DbUtil.getConnection();
                 PreparedStatement ps = connection.prepareStatement(query);
         ) {
-            ps.setInt(1, orderId);
-            ps.setInt(2, product.getId());
-            ResultSet rs = ps.executeQuery();
-
-            return rs.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    private void updateLineItem(LineItem lineItem) { // TODO
-        String query = "" +
-                "UPDATE line_item " +
-                "SET quantity = ? " +
-                "WHERE product_id = ?; ";
-        try (
-                Connection connection = DbUtil.getConnection();
-                PreparedStatement ps = connection.prepareStatement(query);
-        ) {
-            ps.setInt(1, lineItem.getQuantity());
-            ps.setInt(2, lineItem.getProduct().getId());
+            ps.setInt(1, order.getId());
+            ps.setString(2, order.getCurrency().toString());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void update(Order currentOrder) {
+        // We expect the Order to already exist in the database.
+        // Delete Order from the database -> lineItems cascade deleted
+        remove(currentOrder.getId());
+        // Insert Order with the same ID.
+        insertOrderWithId(currentOrder);
+        insertLineItemsOfOrder(currentOrder);
     }
 
     @Override
