@@ -67,11 +67,28 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Login</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
+                    <form action="" method="POST">
+                        <p>
+                            <label for="username" class="username-label">Username:</label><br>
+                            <br>
+                            <input type="text" class="username" id ="username" name="username" >
+                        </p>
+                        <p>
+                            <label for="password" class="username-label">Password:</label><br>
+                            <br>
+                            <input type="password" class="password" id="password" name="password" required><br>
+                        </p>
+                        <br>
+                        <br>
+                        <div class="registration-button-div">
+                            <input class="registration-button" id ="login-button" type="submit" value="Login">
+                            <input class="registration-button" id="signup-button" type="submit" value="Sign up">
+                        </div>
+                    </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
