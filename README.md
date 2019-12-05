@@ -11,7 +11,7 @@ A 3-week Codecool team project for practicing web technologies and DAO pattern w
 ![sign up](./screenshots/signup.png "Sign up")
 
 # Features
-* Listing employees in database by categories
+* List employees in database by categories
 * Add employees to cart
 * Review cart, see sum price
 * Modify amount of employees in cart
